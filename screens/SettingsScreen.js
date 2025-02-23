@@ -13,7 +13,6 @@ const SettingsScreen = ({ navigation }) => {
   const [originalBrightness, setOriginalBrightness] = useState(0.5);
 
   useEffect(() => {
-    // Cargar configuraciones desde AsyncStorage al inicio
     const loadSettings = async () => {
       const savedTemperatureUnit = await AsyncStorage.getItem(
         "temperatureUnit"
@@ -43,7 +42,6 @@ const SettingsScreen = ({ navigation }) => {
   };
 
   useEffect(() => {
-    // Guardar configuración cada vez que se actualice
     saveSettings();
   }, [temperatureUnit, textSize, soundEffects, brightness]);
 
@@ -133,7 +131,6 @@ const SettingsScreen = ({ navigation }) => {
         <View style={styles.separator} />
       </View>
 
-      {/* Text Size */}
       <View style={styles.settingItem}>
         <Text style={[styles.settingTitle, textSizeStyle]}>Text Size</Text>
         <View style={styles.optionContainer}>
