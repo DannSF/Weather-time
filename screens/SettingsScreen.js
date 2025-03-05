@@ -4,6 +4,7 @@ import Slider from "@react-native-community/slider";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Brightness from "expo-brightness";
+import { ScrollView } from "react-native-gesture-handler";
 
 const SettingsScreen = ({ navigation }) => {
   const [temperatureUnit, setTemperatureUnit] = useState("Celsius");
@@ -103,91 +104,106 @@ const SettingsScreen = ({ navigation }) => {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.settingItem}>
-        <Text style={[styles.settingTitle, textSizeStyle]}>
-          Temperature Unit
-        </Text>
-        <View style={styles.optionContainer}>
-          <TouchableOpacity
-            style={[
-              styles.optionButton,
-              temperatureUnit === "Celsius" && styles.selectedOption,
-            ]}
-            onPress={() => setTemperatureUnit("Celsius")}
-          >
-            <Text style={[styles.optionText, textSizeStyle]}>Celsius</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              styles.optionButton,
-              temperatureUnit === "Fahrenheit" && styles.selectedOption,
-            ]}
-            onPress={() => setTemperatureUnit("Fahrenheit")}
-          >
-            <Text style={[styles.optionText, textSizeStyle]}>Fahrenheit</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.separator} />
-      </View>
-
-      <View style={styles.settingItem}>
-        <Text style={[styles.settingTitle, textSizeStyle]}>Text Size</Text>
-        <View style={styles.optionContainer}>
-          {["Normal", "Large", "Extra Large"].map((size) => (
+    <ScrollView>
+      <View style={styles.container}>
+        <View style={styles.settingItem}>
+          <Text style={[styles.settingTitle, textSizeStyle]}>
+            Temperature Unit
+          </Text>
+          <View style={styles.optionContainer}>
             <TouchableOpacity
-              key={size}
               style={[
                 styles.optionButton,
-                textSize === size && styles.selectedOption,
+                temperatureUnit === "Celsius" && styles.selectedOption,
               ]}
-              onPress={() => setTextSize(size)}
+              onPress={() => setTemperatureUnit("Celsius")}
             >
-              <Text style={[styles.optionText, textSizeStyle]}>{size}</Text>
+              <Text style={[styles.optionText, textSizeStyle]}>Celsius</Text>
             </TouchableOpacity>
-          ))}
+            <TouchableOpacity
+              style={[
+                styles.optionButton,
+                temperatureUnit === "Fahrenheit" && styles.selectedOption,
+              ]}
+              onPress={() => setTemperatureUnit("Fahrenheit")}
+            >
+              <Text style={[styles.optionText, textSizeStyle]}>Fahrenheit</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.separator} />
         </View>
-        <View style={styles.separator} />
-      </View>
 
-      <View style={styles.settingItem}>
-        <Text style={[styles.settingTitle, textSizeStyle]}>Sound Effects</Text>
-        <Switch value={soundEffects} onValueChange={setSoundEffects} />
-        <View style={styles.separator} />
-      </View>
+        <View style={styles.settingItem}>
+          <Text style={[styles.settingTitle, textSizeStyle]}>Text Size</Text>
+          <View style={styles.optionContainer}>
+            {["Normal", "Large", "Extra Large"].map((size) => (
+              <TouchableOpacity
+                key={size}
+                style={[
+                  styles.optionButton,
+                  textSize === size && styles.selectedOption,
+                ]}
+                onPress={() => setTextSize(size)}
+              >
+                <Text style={[styles.optionText, textSizeStyle]}>{size}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+          <View style={styles.separator} />
+        </View>
 
-      <View style={styles.settingItem}>
-        <Text style={[styles.settingTitle, textSizeStyle]}>Brightness</Text>
-        <Slider
-          style={{ width: 200, height: 40 }}
-          minimumValue={0}
-          maximumValue={1}
-          step={0.01}
-          value={brightness}
-          onValueChange={handleBrightnessChange}
-          minimumTrackTintColor="blue"
-          maximumTrackTintColor="gray"
-          thumbTintColor="black"
-        />
-        <View style={styles.separator} />
-      </View>
+        <View style={styles.settingItem}>
+          <Text style={[styles.settingTitle, textSizeStyle]}>
+            Sound Effects
+          </Text>
+          <Switch value={soundEffects} onValueChange={setSoundEffects} />
+          <View style={styles.separator} />
+        </View>
 
-      <View style={styles.settingItem}>
-        <Text style={[styles.settingTitle, textSizeStyle]}>Weather Time</Text>
-        <Text style={[styles.aboutText, textSizeStyle]}>
-          (c) 2025 ABC Solutions Pty Ltd
-        </Text>
-        <Text style={[styles.aboutText, textSizeStyle]}>Version 1.0</Text>
-        <Text style={[styles.aboutText, textSizeStyle]}>
-          Last update: 17 February 2025
-        </Text>
-        <Text style={[styles.aboutText, textSizeStyle]}>
-          Build date: 17 February 2025
-        </Text>
-        <Text style={[styles.aboutText, textSizeStyle]}>Developer: </Text>
-        <Text style={[styles.aboutText, textSizeStyle]}>Student Number:</Text>
+        <View style={styles.settingItem}>
+          <Text style={[styles.settingTitle, textSizeStyle]}>Brightness</Text>
+          <Slider
+            style={{ width: 200, height: 40 }}
+            minimumValue={0}
+            maximumValue={1}
+            step={0.01}
+            value={brightness}
+            onValueChange={handleBrightnessChange}
+            minimumTrackTintColor="blue"
+            maximumTrackTintColor="gray"
+            thumbTintColor="black"
+          />
+          <View style={styles.separator} />
+        </View>
+
+        <View style={styles.settingItem}>
+          <Text style={[styles.settingTitle, textSizeStyle]}>Weather Time</Text>
+          <Text style={[styles.aboutText, textSizeStyle]}>
+            (c) 2025 ABC Solutions Pty Ltd
+          </Text>
+          <Text style={[styles.aboutText, textSizeStyle]}>Version 1.0</Text>
+          <Text style={[styles.aboutText, textSizeStyle]}>
+            Last update: 17 February 2025
+          </Text>
+          <Text style={[styles.aboutText, textSizeStyle]}>
+            Build date: 17 February 2025
+          </Text>
+          <Text style={[styles.aboutText, textSizeStyle]}>
+            Developer: Danny Flores, James Restrepo, Juan Montoya{" "}
+          </Text>
+          <Text style={[styles.aboutText, textSizeStyle]}>
+            Student Number:{" "}
+          </Text>
+          <Text style={[styles.aboutText, textSizeStyle]}>
+            Thank you for purchasing Weather Time. If you have any issues or
+            feedback, please contact: 1800 123 456. Data provided by
+            openweather. Best efforts are taken to ensure accuracy of the data,
+            but no guarantees are made. To view the official data, please visit
+            the website of openweather
+          </Text>
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
